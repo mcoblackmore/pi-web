@@ -353,6 +353,19 @@ export function AppShell() {
               </svg>
             )}
           </button>
+          {/* Brand name */}
+          <div style={{
+            display: "flex", alignItems: "center", gap: 8,
+            padding: "0 10px", height: "100%",
+            borderRight: "1px solid var(--border)",
+            flexShrink: 0,
+          }}>
+            <span style={{
+              fontSize: 13, fontWeight: 600,
+              color: "var(--text)",
+              letterSpacing: "0.02em",
+            }}>科即糖 · AI世界让你领先一步</span>
+          </div>
           <button
             onClick={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
@@ -570,7 +583,7 @@ export function AppShell() {
           ) : showPlaceholder ? (
             activeCwd ? (
               <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-muted)", fontSize: 15 }}>
-                Select a session from the sidebar
+                从侧边栏选择一个会话
               </div>
             ) : (
               <div style={{ position: "absolute", top: 12, left: 12, display: "flex", alignItems: "flex-start", gap: 8, userSelect: "none", pointerEvents: "none" }}>
@@ -578,10 +591,10 @@ export function AppShell() {
                   <line x1="20" y1="12" x2="4" y2="12" /><polyline points="10 6 4 12 10 18" />
                 </svg>
                 <div>
-                  <div style={{ fontSize: 18, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>Get Started</div>
+                  <div style={{ fontSize: 18, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>开始使用</div>
                   <div style={{ fontSize: 12, color: "var(--text-muted)", lineHeight: 1.8 }}>
-                    <span style={{ color: "var(--text-dim)", marginRight: 6 }}>1.</span>Select a project directory from the sidebar<br />
-                    <span style={{ color: "var(--text-dim)", marginRight: 6 }}>2.</span>Add models via the <strong style={{ color: "var(--text)" }}>Models</strong> button at the bottom
+                    <span style={{ color: "var(--text-dim)", marginRight: 6 }}>1.</span>从侧边栏选择一个项目目录<br />
+                    <span style={{ color: "var(--text-dim)", marginRight: 6 }}>2.</span>通过底部的 <strong style={{ color: "var(--text)" }}>Models</strong> 按钮添加模型
                   </div>
                 </div>
               </div>

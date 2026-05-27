@@ -9,8 +9,9 @@ const notoSansMono = Noto_Sans_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pi Agent Web",
-  description: "Pi Coding Agent Web Interface",
+  title: "科即糖 · AI世界让你领先一步",
+  description: "科即糖 AIGC 智能编程助手 — 让 AI 编码更简单",
+  icons: { icon: "/favicon.png" },
 };
 
 export default function RootLayout({

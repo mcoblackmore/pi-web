@@ -1052,7 +1052,7 @@ function ApiKeyDetail({ provider, onRefresh }: { provider: ApiKeyProvider; onRef
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             )}
-            {savedOk ? "Saved" : saving ? "Saving…" : "Save"}
+            {savedOk ? "已保存" : saving ? "保存中…" : "保存"}
           </button>
         </div>
       </Field>
@@ -1545,7 +1545,7 @@ export function ModelsConfig({ onClose }: { onClose: () => void }) {
           <div style={{ flex: 1, overflowY: "auto", padding: 20 }}>
             {loading ? null : detailContent ?? (
               <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-dim)", fontSize: 13 }}>
-                Select a provider or model
+                选择一个提供商或模型
               </div>
             )}
           </div>
@@ -1575,7 +1575,7 @@ export function ModelsConfig({ onClose }: { onClose: () => void }) {
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             )}
-            <span>{savedOk ? "Saved" : saving ? "Saving…" : "Save"}</span>
+            <span>{savedOk ? "已保存" : saving ? "保存中…" : "保存"}</span>
           </button>
         </div>
       </div>

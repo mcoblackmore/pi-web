@@ -246,7 +246,7 @@ function UserMessageView({ message, entryId, onFork, forking, onNavigate, prevAs
                 <button
                   onClick={() => { onFork!(entryId!); }}
                   disabled={forking}
-                  title={forking ? "Creating new session…" : "New session — creates an independent copy from here"}
+                  title={forking ? "创建新会话中…" : "新建会话 — 从此处创建独立副本"}
                   style={{
                     display: "flex", alignItems: "center", gap: 4,
                     padding: "3px 8px", height: 22,
@@ -267,7 +267,7 @@ function UserMessageView({ message, entryId, onFork, forking, onNavigate, prevAs
                     <circle cx="6" cy="18" r="3" />
                     <path d="M18 9a9 9 0 0 1-9 9" />
                   </svg>
-                  {forking ? "Creating…" : "New session"}
+                  {forking ? "创建中…" : "新建会话"}
                 </button>
               )}
             </div>
@@ -298,6 +298,7 @@ function AssistantMessageView({
   const blocks = message.content ?? [];
   const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
   const streamStartRef = useRef<number | null>(null);
   const [tps, setTps] = useState<number | null>(null);
   const blocksRef = useRef(blocks);
@@ -340,6 +341,23 @@ function AssistantMessageView({
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     });
+  };
+
+  const speakContent = () => {
+    if (speaking) {
+      window.speechSynthesis.cancel();
+      setSpeaking(false);
+      return;
+    }
+    if (!textContent) return;
+    const synth = window.speechSynthesis;
+    synth.cancel();
+    const utter = new SpeechSynthesisUtterance(textContent);
+    utter.rate = 1.0;
+    utter.onend = () => setSpeaking(false);
+    utter.onerror = () => setSpeaking(false);
+    setSpeaking(true);
+    synth.speak(utter);
   };
 
   useEffect(() => {
@@ -495,6 +513,44 @@ function AssistantMessageView({
               </svg>
             )}
             {copied ? "Copied" : "Copy"}
+          </button>
+        )}
+        {textContent && !isStreaming && (
+          <button
+            onClick={speakContent}
+            title={speaking ? "点击停止朗读" : "朗读回复"}
+            style={{
+              display: "flex", alignItems: "center", gap: 4,
+              padding: "3px 8px", height: 22,
+              background: "none", border: "none",
+              borderRadius: 5,
+              color: speaking ? "var(--accent)" : "var(--text-dim)",
+              cursor: "pointer",
+              fontSize: 11, fontWeight: 400,
+              whiteSpace: "nowrap",
+              opacity: hovered ? 1 : 0,
+              pointerEvents: hovered ? "auto" : "none",
+              transition: "opacity 0.12s, color 0.12s",
+            }}
+            onMouseEnter={(e) => { if (!speaking) e.currentTarget.style.color = "var(--accent)"; }}
+            onMouseLeave={(e) => { if (!speaking) e.currentTarget.style.color = "var(--text-dim)"; }}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              {speaking ? (
+                <>
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                </>
+              ) : (
+                <>
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <line x1="23" y1="9" x2="17" y2="15" />
+                  <line x1="17" y1="9" x2="23" y2="15" />
+                </>
+              )}
+            </svg>
+            {speaking ? "朗读中…" : "朗读"}
           </button>
         )}
         {time && !isStreaming && (

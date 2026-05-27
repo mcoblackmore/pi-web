@@ -283,7 +283,7 @@ function AddSkillPanel({
             onKeyDown={(e) => {
               if (e.key === "Enter") search(query);
             }}
-            placeholder="e.g. react, testing, deploy"
+            placeholder="例如 react, testing, deploy"
             style={{
               flex: 1,
               padding: "7px 10px",
@@ -310,7 +310,7 @@ function AddSkillPanel({
               flexShrink: 0,
             }}
           >
-            {searching ? "Searching…" : "Search"}
+            {searching ? "搜索中…" : "搜索"}
           </button>
         </div>
 
@@ -474,10 +474,10 @@ function AddSkillPanel({
                   }}
                 >
                   {isInstalled
-                    ? "✓ Installed"
+                    ? "✓ 已安装"
                     : isInstalling
-                      ? "Installing…"
-                      : "Install"}
+                      ? "安装中…"
+                      : "安装"}
                 </button>
               </div>
             );
@@ -874,7 +874,7 @@ export function SkillsConfig({
                   fontSize: 13,
                 }}
               >
-                Select a skill
+                选择一个技能
               </div>
             )}
           </div>

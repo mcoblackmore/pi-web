@@ -271,7 +271,7 @@ export function FileExplorer({ cwd, onOpenFile, refreshKey, onAtMention }: Props
       ))}
       {roots.length === 0 && (
         <div style={{ padding: "8px 12px", fontSize: 11, color: "var(--text-dim)" }}>
-          No files found
+          未找到文件
         </div>
       )}
     </div>

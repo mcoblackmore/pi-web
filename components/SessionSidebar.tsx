@@ -158,7 +158,7 @@ function PiAgentTitle() {
   const [scrambling, setScrambling] = useState(false);
   const revertTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const target = showVersion ? `${process.env.NEXT_PUBLIC_APP_VERSION ?? "0.0.0"}p${process.env.NEXT_PUBLIC_PI_VERSION ?? "0.0.0"}` : "Pi Agent Web";
+  const target = showVersion ? `${process.env.NEXT_PUBLIC_APP_VERSION ?? "0.0.0"}p${process.env.NEXT_PUBLIC_PI_VERSION ?? "0.0.0"}` : "科即糖";
   const display = useScramble(target, scrambling);
 
   const triggerScramble = useCallback((toVersion: boolean) => {
@@ -183,15 +183,17 @@ function PiAgentTitle() {
   return (
     <button
       onClick={handleClick}
+      title={showVersion ? `${process.env.NEXT_PUBLIC_APP_VERSION ?? "0.0.0"} / pi ${process.env.NEXT_PUBLIC_PI_VERSION ?? "0.0.0"}` : "科即糖"}
       style={{
         background: "none", border: "none", padding: 0, cursor: "default",
-        fontWeight: 700, fontSize: 15, letterSpacing: "-0.01em",
-        color: showVersion ? "var(--accent)" : "var(--text)",
-        fontFamily: "var(--font-mono)",
-        minWidth: "6ch",
+        display: "flex", alignItems: "center",
       }}
     >
-      {display}
+      <img src="/logo.png" alt="科即糖" style={{
+        height: 28, width: "auto",
+        opacity: showVersion ? 0.6 : 1,
+        transition: "opacity 0.2s",
+      }} />
     </button>
   );
 }
@@ -365,7 +367,7 @@ export function SessionSidebar({ selectedSessionId, onSelectSession, onNewSessio
                 flexShrink: 0,
                 transition: "background 0.12s, color 0.12s, border-color 0.12s",
               }}
-              title={selectedCwd ? `New session in ${selectedCwd}` : "Select a project first"}
+              title={selectedCwd ? `在 ${selectedCwd} 中新建会话` : "请先选择一个项目"}
               onMouseEnter={(e) => {
                 if (!selectedCwd) return;
                 e.currentTarget.style.background = "var(--bg-selected)";
@@ -650,7 +652,7 @@ export function SessionSidebar({ selectedSessionId, onSelectSession, onNewSessio
         )}
         {!loading && !error && filteredSessions.length === 0 && (
           <div style={{ padding: "16px 14px", color: "var(--text-muted)", fontSize: 12 }}>
-            No sessions found
+            未找到会话
           </div>
         )}
         {sessionTree.map((node) => (
@@ -1074,7 +1076,7 @@ function SessionItem({
               </button>
               <button
                 onClick={handleDeleteClick}
-                title="Delete"
+                title="删除"
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center",
                   width: 32, height: 32, padding: 0,
