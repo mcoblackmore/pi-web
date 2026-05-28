@@ -13,6 +13,7 @@ const { parseArgs } = require("util");
 const readline = require("readline");
 
 const pkgDir = path.join(__dirname, "..");
+process.env.PKG_ROOT = pkgDir;
 const nextDir = path.join(pkgDir, ".next");
 const usersFile = path.join(pkgDir, "data", "users.json");
 
