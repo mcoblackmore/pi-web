@@ -190,7 +190,7 @@ function PiAgentTitle() {
       }}
     >
       <img src="/logo.png" alt="科即糖" style={{
-        height: 28, width: "auto",
+        height: 38, width: "auto",
         opacity: showVersion ? 0.6 : 1,
         transition: "opacity 0.2s",
       }} />
